@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Script Hub - Profile</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Script Hub</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="scripts.html" class="nav-link">Scripts</a></li>
+                <li><a href="profile.html" class="nav-link active">Profile</a></li>
+                <li><a href="settings.html" class="nav-link">Settings</a></li>
+                <li><a href="admin.html" class="nav-link">Admin</a></li>
+                <li><a href="login.html" class="nav-link">Login</a></li>
+                <li><a href="signup.html" class="nav-link">Signup</a></li>
+                <li><button id="theme-toggle" class="theme-btn">🌙</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="profile-cover"></div>
+        <div class="profile-header" style="margin-top: -80px; position: relative; z-index: 10;">
+            <div class="profile-info">
+                <div class="avatar-container">
+                    <img id="profile-avatar" src="https://api.dicebear.com/7.x/initials/svg?seed=User" alt="Profile Avatar" class="profile-avatar">
+                    <div class="profile-status status-online"></div>
+                    <button id="avatar-upload-btn" class="avatar-upload-overlay" style="display: none;" onclick="uploadAvatar()">📷</button>
+                </div>
+                <div class="profile-details">
+                    <h1 id="profile-username">Loading...</h1>
+                    <div class="profile-badges" id="profile-badge"></div>
+                    <p class="profile-bio" id="profile-bio">Loading bio...</p>
+
+                    <div class="social-links" id="social-links" style="display: none;">
+                        <a href="#" class="social-link" id="github-link">
+                            <span>🐙</span> GitHub
+                        </a>
+                        <a href="#" class="social-link" id="discord-link">
+                            <span>💬</span> Discord
+                        </a>
+                        <a href="#" class="social-link" id="website-link">
+                            <span>🌐</span> Website
+                        </a>
+                    </div>
+
+                    <div class="achievement-badges" id="achievement-badges">
+                        <div class="achievement-badge" title="First Post">
+                            🎉
+                            <div class="achievement-tooltip">First Post</div>
+                        </div>
+                        <div class="achievement-badge" title="Popular Creator">
+                            🌟
+                            <div class="achievement-tooltip">Popular Creator</div>
+                        </div>
+                        <div class="achievement-badge" title="Code Master">
+                            💻
+                            <div class="achievement-tooltip">Code Master</div>
+                        </div>
+                    </div>
+
+                    <div class="profile-stats">
+                        <div class="stat-item">
+                            📝 <span class="stat-number" id="user-posts-count">0</span> Posts
+                        </div>
+                        <div class="stat-item">
+                            💬 <span class="stat-number" id="user-comments-count">0</span> Comments
+                        </div>
+                        <div class="stat-item">
+                            ⭐ <span class="stat-number" id="user-reputation">0</span> Reputation
+                        </div>
+                        <div class="stat-item">
+                            👥 <span class="stat-number" id="user-followers">0</span> Followers
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-actions">
+                <button id="edit-profile-btn" onclick="editProfile()" class="btn btn-primary" style="display: none;">✏️ Edit Profile</button>
+                <button id="follow-btn" onclick="followUser()" class="btn btn-secondary" style="display: none;">+ Follow</button>
+                <button id="message-btn" onclick="sendMessage()" class="btn btn-secondary" style="display: none;">💬 Message</button>
+            </div>
+        </div>
+
+        <div class="profile-activity" id="profile-activity" style="display: none;">
+            <h3>📊 Activity Overview</h3>
+            <p>Contributions in the last year</p>
+            <div class="activity-chart" id="activity-chart"></div>
+            <div style="text-align: center; margin-top: 1rem; color: var(--secondary-color); font-size: 0.9rem;">
+                Less ◻️ ◻️ ◻️ ◻️ ◻️ More
+            </div>
+        </div>
+
+        <div id="visitor-actions" style="display: none;"></div>
+
+        <div class="profile-content">
+            <div class="profile-tabs">
+                <button class="tab-btn active" onclick="showTab('posts')">📝 Posts</button>
+                <button class="tab-btn" onclick="showTab('comments')">💬 Comments</button>
+                <button class="tab-btn" onclick="showTab('favorites')">⭐ Favorites</button>
+            </div>
+
+            <div id="posts-tab" class="tab-content">
+                <h3>User Posts</h3>
+                <div id="user-posts" class="posts-grid">
+                    <!-- User posts will be loaded here -->
+                </div>
+            </div>
+
+            <div id="comments-tab" class="tab-content" style="display: none;">
+                <h3>Recent Comments</h3>
+                <div id="user-comments">
+                    <!-- User comments will be loaded here -->
+                </div>
+            </div>
+
+            <div id="favorites-tab" class="tab-content" style="display: none;">
+                <h3>Favorite Scripts</h3>
+                <div id="user-favorites" class="posts-grid">
+                    <!-- User favorites will be loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Edit Profile Modal -->
+        <div id="edit-profile-modal" class="modal" style="display: none;">
+            <div class="modal-content" style="max-width: 600px;">
+                <h3>✏️ Edit Profile</h3>
+
+                <div class="form-group">
+                    <label>Username:</label>
+                    <input type="text" id="edit-username" placeholder="Username">
+                </div>
+
+                <div class="form-group">
+                    <label>Bio:</label>
+                    <textarea id="edit-bio" placeholder="Tell us about yourself" rows="4"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Profile Theme:</label>
+                    <div class="profile-theme-selector">
+                        <div class="theme-option theme-default active" data-theme="default"></div>
+                        <div class="theme-option theme-sunset" data-theme="sunset"></div>
+                        <div class="theme-option theme-forest" data-theme="forest"></div>
+                        <div class="theme-option theme-ocean" data-theme="ocean"></div>
+                        <div class="theme-option theme-galaxy" data-theme="galaxy"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Social Links:</label>
+                    <input type="url" id="edit-github" placeholder="GitHub URL (optional)">
+                    <input type="url" id="edit-discord" placeholder="Discord Username (optional)" style="margin-top: 0.5rem;">
+                    <input type="url" id="edit-website" placeholder="Website URL (optional)" style="margin-top: 0.5rem;">
+                </div>
+
+                <div class="form-group">
+                    <label>Status:</label>
+                    <select id="edit-status">
+                        <option value="online">🟢 Online</option>
+                        <option value="away">🟡 Away</option>
+                        <option value="busy">🔴 Busy</option>
+                        <option value="offline">⚫ Offline</option>
+                    </select>
+                </div>
+
+                <div class="modal-actions">
+                    <button onclick="closeEditModal()" class="btn btn-secondary">Cancel</button>
+                    <button onclick="saveProfile()" class="btn btn-primary">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="toast-container"></div>
+    <script src="script.js"></script>
+    <script src="profile.js"></script>
+</body>
+</html>

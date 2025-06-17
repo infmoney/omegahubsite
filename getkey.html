@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Script Hub - Get Key</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Script Hub</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="scripts.html" class="nav-link">Scripts</a></li>
+                <li><a href="profile.html" class="nav-link">Profile</a></li>
+                <li><a href="login.html" class="nav-link">Login</a></li>
+                <li><a href="signup.html" class="nav-link">Signup</a></li>
+                <li><button id="theme-toggle" class="theme-btn">🌙</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="key-generator">
+        <h1>Generate Your Access Key</h1>
+        <p>Complete the task below to generate your unique access key</p>
+
+        <div class="task-simulator" id="task-container">
+            <h3>Step 1: Complete Verification</h3>
+            <p id="task-description">Click the button below to start the verification process</p>
+            <button id="start-task" class="btn btn-primary" onclick="startTask()">Start Verification</button>
+            
+            <div id="progress-container" style="display: none;">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <p id="progress-text">Initializing...</p>
+            </div>
+        </div>
+
+        <div id="key-generation" style="display: none;">
+            <h3>Step 2: Generate Key</h3>
+            <p>Verification complete! Click below to generate your key.</p>
+            <button id="generate-key" class="btn btn-success" onclick="generateKey()">Generate Key</button>
+        </div>
+
+        <div id="key-result" style="display: none;">
+            <h3>Your Access Key</h3>
+            <div class="key-display" id="generated-key">
+                <!-- Generated key will appear here -->
+            </div>
+            <button onclick="copyKey()" class="btn btn-primary">Copy to Clipboard</button>
+            <p style="margin-top: 1rem; color: var(--secondary-color);">
+                <strong>Note:</strong> You can generate a new key after the cooldown period expires.
+            </p>
+        </div>
+
+        <div id="cooldown-message" style="display: none;">
+            <h3>Cooldown Active</h3>
+            <p>You can generate a new key in <span id="cooldown-timer"></span></p>
+        </div>
+    </main>
+
+    <div id="toast-container"></div>
+    <script src="script.js"></script>
+    <script src="key-generator.js"></script>
+</body>
+</html>

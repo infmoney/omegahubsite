@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Script Hub - Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Script Hub - Admin</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="scripts.html" class="nav-link">Scripts</a></li>
+                <li><a href="profile.html" class="nav-link">Profile</a></li>
+                <li><button id="theme-toggle" class="theme-btn">🌙</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <!-- Admin Login Form -->
+        <div id="admin-login" class="admin-login-container">
+            <div class="admin-login-card">
+                <h1>🔐 Admin Access</h1>
+                <p>Enter admin password to access dashboard</p>
+                <form id="admin-login-form">
+                    <input type="password" id="admin-password" placeholder="Admin Password" required>
+                    <button type="submit" class="btn btn-primary">Access Dashboard</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Admin Dashboard -->
+        <div id="admin-container" style="display: none;">
+            <div class="admin-header">
+                <h1>🛡️ Admin Dashboard</h1>
+                <button onclick="logoutAdmin()" class="btn btn-secondary">Logout</button>
+            </div>
+
+            <div class="admin-stats">
+                <div class="stat-card">
+                    <h3>Total Users</h3>
+                    <span id="total-users">0</span>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Posts</h3>
+                    <span id="total-posts">0</span>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Comments</h3>
+                    <span id="total-comments">0</span>
+                </div>
+                <div class="stat-card">
+                    <h3>Banned Users</h3>
+                    <span id="banned-users">0</span>
+                </div>
+            </div>
+
+            <div class="admin-tabs">
+                <button class="tab-btn active" onclick="showTab('users')">👥 Users</button>
+                <button class="tab-btn" onclick="showTab('posts')">📝 Posts</button>
+                <button class="tab-btn" onclick="showTab('reports')">⚠️ Reports</button>
+                <button class="tab-btn" onclick="showTab('settings')">⚙️ Settings</button>
+            </div>
+
+            <div id="users-tab" class="tab-content">
+                <h2>User Management</h2>
+                <div class="admin-controls">
+                    <input type="text" id="user-search" placeholder="Search users..." onkeyup="filterUsers()">
+                </div>
+                <div id="users-list"></div>
+            </div>
+
+            <div id="posts-tab" class="tab-content" style="display: none;">
+                <h2>Post Management</h2>
+                <div class="admin-controls">
+                    <input type="text" id="post-search" placeholder="Search posts..." onkeyup="filterPosts()">
+                    <select id="post-filter" onchange="filterPosts()">
+                        <option value="all">All Posts</option>
+                        <option value="pinned">Pinned</option>
+                        <option value="reported">Reported</option>
+                    </select>
+                </div>
+                <div id="posts-list"></div>
+            </div>
+
+            <div id="reports-tab" class="tab-content" style="display: none;">
+                <h2>Reports & Moderation</h2>
+                <div id="reports-list">
+                    <p>No reports to review</p>
+                </div>
+            </div>
+
+            <div id="settings-tab" class="tab-content" style="display: none;">
+                <h2>Site Settings</h2>
+                <div class="settings-grid">
+                    <div class="setting-item">
+                        <label>Site Name:</label>
+                        <input type="text" value="Script Hub" id="site-name">
+                    </div>
+                    <div class="setting-item">
+                        <label>Max Posts Per User:</label>
+                        <input type="number" value="50" id="max-posts">
+                    </div>
+                    <div class="setting-item">
+                        <label>Registration Open:</label>
+                        <input type="checkbox" checked id="registration-open">
+                    </div>
+                </div>
+                <button onclick="saveSettings()" class="btn btn-primary">Save Settings</button>
+            </div>
+        </div>
+    </main>
+
+    <div id="toast-container"></div>
+    <script src="script.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

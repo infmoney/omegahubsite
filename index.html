@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Script Hub - Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Script Hub</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link active">Home</a></li>
+                <li><a href="scripts.html" class="nav-link">Scripts</a></li>
+                <li><a href="forums.html" class="nav-link">Forums</a></li>
+                <li><a href="profile.html" class="nav-link">Profile</a></li>
+                <li><a href="settings.html" class="nav-link">Settings</a></li>
+                <li><a href="login.html" class="nav-link">Login</a></li>
+                <li><a href="signup.html" class="nav-link">Signup</a></li>
+                <li><button id="theme-toggle" class="theme-btn">🌙</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <section class="hero">
+            <h1>Welcome to Script Hub</h1>
+            <p>Share, discover, and vote on amazing scripts from the community</p>
+            <div class="hero-buttons">
+                <a href="scripts.html" class="btn btn-primary">Browse Scripts</a>
+                <a href="getkey.html" class="btn btn-secondary">Get a Key</a>
+            </div>
+        </section>
+
+        <section class="featured-posts">
+            <h2>Featured Posts</h2>
+            <div class="posts-grid" id="featured-posts">
+                <!-- Featured posts will be loaded here -->
+            </div>
+        </section>
+    </main>
+
+    <div id="toast-container"></div>
+
+    <!-- 🚀 NEW MEGA FEATURES! -->
+    <button class="voice-command-btn" onclick="startVoiceCommand()" title="Voice Commands (Say: 'search for', 'create new post', 'go home')">
+        🎤
+    </button>
+
+    <div class="floating-menu">
+        <div class="floating-menu-item" onclick="showAnalytics()" title="Analytics Dashboard">
+            📊
+        </div>
+        <div class="floating-menu-item" onclick="showSuggestions()" title="Smart Suggestions">
+            🤖
+        </div>
+        <div class="floating-menu-item" onclick="window.location.href='new-post.html'" title="Quick Post">
+            ✏️
+        </div>
+        <div class="floating-menu-item" onclick="toggleNotificationCenter()" title="Notifications">
+            🔔
+        </div>
+    </div>
+
+    <div id="notification-center" class="notification-center">
+        <div class="notification-item">
+            <h4>🎉 Welcome to the Enhanced Hub!</h4>
+            <p>Check out all the new features we've added!</p>
+        </div>
+        <div class="notification-item">
+            <h4>🔥 Trending Now</h4>
+            <p>JavaScript automation scripts are popular!</p>
+        </div>
+        <div class="notification-item">
+            <h4>🎯 Achievement Ready</h4>
+            <p>You're close to unlocking "Code Master"!</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Toggle notification center
+        function toggleNotificationCenter() {
+            const center = document.getElementById('notification-center');
+            center.style.display = center.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // Close notification center when clicking outside
+        document.addEventListener('click', function(e) {
+            const center = document.getElementById('notification-center');
+            const toggle = e.target.closest('.floating-menu-item');
+
+            if (!center.contains(e.target) && !toggle) {
+                center.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Script Hub - New Post</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Script Hub</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="scripts.html" class="nav-link">Scripts</a></li>
+                <li><a href="profile.html" class="nav-link">Profile</a></li>
+                <li><a href="login.html" class="nav-link">Login</a></li>
+                <li><a href="signup.html" class="nav-link">Signup</a></li>
+                <li><button id="theme-toggle" class="theme-btn">🌙</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="form-container" style="max-width: 800px;">
+            <h2>Create New Script Post</h2>
+            <form id="new-post-form">
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <textarea id="description" name="description" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="tags">Tags (comma-separated):</label>
+                    <input type="text" id="tags" name="tags" placeholder="javascript, utility, automation">
+                </div>
+                <div class="form-group">
+                    <label for="code">Script Code:</label>
+                    <div class="code-editor-enhanced">
+                        <div class="editor-toolbar">
+                            <button type="button" onclick="formatCode()" class="btn btn-secondary">🎨 Format</button>
+                            <button type="button" onclick="validateCode()" class="btn btn-secondary">✅ Validate</button>
+                            <button type="button" onclick="enableCollaboration()" class="btn btn-secondary">👥 Collaborate</button>
+                            <select id="editor-theme" onchange="changeEditorTheme()">
+                                <option value="default">Default Theme</option>
+                                <option value="dark">Dark Theme</option>
+                                <option value="monokai">Monokai</option>
+                                <option value="github">GitHub</option>
+                            </select>
+                        </div>
+                        <textarea id="code" data-language="javascript" required placeholder="Paste your script code here..."></textarea>
+                        <div class="editor-footer">
+                            <span id="line-count">Lines: 1</span>
+                            <span id="char-count">Characters: 0</span>
+                            <span id="syntax-status">✅ Syntax OK</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="language">Programming Language:</label>
+                    <select id="language" name="language" style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: 0.5rem; background-color: var(--bg-color); color: var(--text-color);">
+                        <option value="javascript">JavaScript</option>
+                        <option value="python">Python</option>
+                        <option value="java">Java</option>
+                        <option value="cpp">C++</option>
+                        <option value="csharp">C#</option>
+                        <option value="php">PHP</option>
+                        <option value="ruby">Ruby</option>
+                        <option value="go">Go</option>
+                        <option value="rust">Rust</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Create Post</button>
+            </form>
+        </div>
+    </main>
+
+    <div id="toast-container"></div>
+    <script src="script.js"></script>
+    <script src="new-post.js"></script>
+</body>
+</html>

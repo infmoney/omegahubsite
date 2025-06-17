@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Script Hub - Scripts</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Script Hub</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="scripts.html" class="nav-link active">Scripts</a></li>
+                <li><a href="profile.html" class="nav-link">Profile</a></li>
+                <li><a href="settings.html" class="nav-link">Settings</a></li>
+                <li><a href="login.html" class="nav-link">Login</a></li>
+                <li><a href="signup.html" class="nav-link">Signup</a></li>
+                <li><button id="theme-toggle" class="theme-btn">🌙</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <section class="scripts-header">
+            <h1>All Scripts</h1>
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search scripts, authors, or tags..." 
+                       onkeyup="searchPosts(this.value)">
+                <span class="search-icon">🔍</span>
+            </div>
+            <div class="scripts-actions">
+                <select id="sort-select" onchange="sortPosts(this.value)">
+                    <option value="newest">Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                    <option value="most-voted">Most Voted</option>
+                    <option value="most-viewed">Most Viewed</option>
+                </select>
+                <a href="new-post.html" class="btn btn-primary">Share Your Script</a>
+            </div>
+        </section>
+
+        <div class="posts-grid" id="scripts-container">
+            <!-- Scripts will be loaded here -->
+        </div>
+
+        <div id="loading" class="loading" style="display: none;">
+            <div class="spinner"></div>
+        </div>
+    </main>
+
+    <div id="toast-container"></div>
+    <script src="script.js"></script>
+    <script src="scripts-page.js"></script>
+</body>
+</html>
